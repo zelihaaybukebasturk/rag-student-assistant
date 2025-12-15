@@ -8,3 +8,10 @@ vectorstore/
 uploads/
 
 .env
+
+# Data folders
+data/raw/*
+data/processed/*
+
+!data/raw/.gitkeep
+!data/processed/.gitkeep
