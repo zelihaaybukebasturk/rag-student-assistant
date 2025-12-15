@@ -1,0 +1,1961 @@
+doc_id,title,source,content
+1,ch02,ch02.pdf,"CENG493
+Text Preprocessing and Vector Models
+NLP Tasks Implementation Steps
+1.Formulating a research question or NLP task.
+2.Data collection and corpus building.
+3.Data preprocessing.
+4.Generating embeddings.
+5.Embedding-related tasks.
+6.Results.
+7.Interpreting results.
+https://carpentries-incubator.github.io/
+
+So, how to represent text(s) in 
+NLP?
+Definitions
+Letters and characters
+Definitions
+Corpus:
+N-Gram
+
+
+Vector
+
+Why vector models?
+
+
+
+How? 
+First very simple method → Bag of Words
+But…
+• Order matters! (all the time???)
+
+Documents -> Vectors
+
+Documents -> Vectors
+
+Simple Classification Example
+
+Simple Classification Example
+
+Code
+
+
+Normalization
+• A vector can be (length-) normalized by dividing each of its 
+components by its length.
+• Dividing a vector by its L2 norm makes it a unit (length) vector (on 
+surface of unit hypersphere)
+• Long and short documents now have comparable weights
+
+But, first text preprocessing!
+• Text Cleaning
+• Converting to lowercase
+• Removing URLs
+• Removing emojis
+• Removing remove non-word and non-whitespace characters
+• Removing digits
+• Removing accents(?)
+• Tokenization
+• Stopword Removal
+• Stemming
+• Lemmatization
+Tokenization
+
+Word-based tokenization
+“Is it weird I don’t like coffee?” →[“Is”, “it”, “weird”, “I”, “don’t”, “like”, “coffee?”]
+• “?” in “coffee?” is important or not?
+• What if we have a sentence “I love coffee.” in our corpus?
+• The reason that we should take punctuation into account while performing 
+tokenization is that we do not want our model to learn different representations 
+of the same word with every possible punctuation.
+• let’s take punctation into account.
+• [“Is”, “it”, “wierd”, “I”, “don”, “’”, “t”, “like”, “coffee”, “?”]
+Word-based tokenization
+• State-of-the-art NLP models have their own tokenizers because each 
+model uses different rules to perform tokenization along with 
+tokenizing using spaces.
+• Tokenizers of different NLP models can create different tokens for the 
+same text.
+• Space and punctuation, and rule-based tokenization are all examples 
+of word-based tokenization
+• Drawbacks???
+Character-based tokenization
+• Character-based tokenizers split the raw text into individual 
+characters.
+• A language has many different words but has a fixed number of 
+characters
+• This results in a very small vocabulary.
+Subword-based tokenization
+• The main idea is to solve the issues faced by word-based tokenization;
+• very large vocabulary size
+• large number of OOV tokens
+• different meaning of very similar words
+• and character-based tokenization;
+• very long sequences
+• less meaningful individual tokens
+• The subword-based tokenization algorithms uses the following principles.
+1.Do not split the frequently used words into smaller subwords.
+2.Split the rare words into smaller meaningful subwords.
+Stopwords
+
+Stopwords –Distance consideration
+
+Stopwords
+
+Stemming & Lemmatization
+
+Stemming & Lemmatization
+
+Stemming
+
+Lemmatization
+
+
+Applications in NLP
+• Tokenizationis used in text preprocessing, sentiment analysis, and 
+language modeling.
+• Stemming is useful for search engines, information retrieval, and text 
+mining.
+• Lemmatization is essential for chatbots, text classification, and 
+semantic analysis.
+POS(Parts-Of-Speech) Tagging
+
+POS
+• Part-of-speech tags describe the characteristic structure of 
+lexical terms within a sentence or text
+• We can use them for making assumptions about semantics.
+• Named Entity Recognition
+• Co-reference Resolution
+• Speech Recognition
+
+Back to vector models
+Vector Similarity
+
+How can we calculate vector similarity?
+
+Euclidean Distance
+Any problem???
+Another Example
+• «I love playing football with my friends»
+• «I hate waching and playing basketball»
+• «When I was a kid I was playing football with my friends every day all the 
+evening»
+
+Cosine similarity
+
+
+TF-IDF (Term Frequency-Inverse 
+Document Frequency)
+Still embedding?
+TF-IDF (Term Frequency-Inverse Document 
+Frequency)
+• TF-IDF (Term Frequency-Inverse Document Frequency) is a method 
+used to assess the importance of a word in a document or a collection 
+of texts. 
+• The result of TF-IDF is obtained by multiplying Term Frequency (TF) 
+and Inverse Document Frequency (IDF).
+
+TF-IDF
+• Term Frequency (TF): 
+• Measures how often a term appears in a text. 
+• It is calculated as the number of occurrences of a term divided by the total 
+number of terms in the text.
+• Inverse Document Frequency (IDF): 
+• Measures the rarity of a term across all texts in the collection. 
+• It is calculated as the logarithm of the total number of texts divided by the 
+number of texts containing the term.
+• TF-IDF: 
+• The product of TF and IDF, giving a higher weight to terms that are frequent in 
+a text but rare in the entire .
+TF-IDF
+
+BoW vs TF-IDF
+We can reduce the feature space by applying stopwords removal, stemming etc. but the initial 
+step of bag-of-words acts as a downside because it emphasizes words only based on counts. 
+BoW vs TF-IDF
+• Unlike, bag-of-words, tf-idf creates a normalized count where each 
+word count is divided by the number of documents this word appears 
+in.
+• bow(w, d) = # times word w appears in document d.
+• tf-idf(w, d) = bow(w, d) x N / (# documents in which word w appears)
+• The fraction (N / (# documents in which word w appears)) is known 
+as inverse document frequency.
+"
+2,ch03,ch03.pdf,"Language Models
+CENG 493
+Language Models
+• A language model is a statistical or machine learning model trained to 
+conduct a probability distribution over words.
+• The primary purpose of a language model is to capture the statistical 
+properties of natural language.
+• By learning the probability distribution of word sequences, a language 
+model can predict the likelihood of a given word following a sequence 
+of words.
+• Language models can be broadly categorized into two types:
+• Pure Statistical Methods
+• Neural Models
+Language Models
+• Pure Statistical Methods
+• N-gram models
+• Exponential Models (i.e. Maximum Entropy model)
+• Skip-gram models
+• Neural Models
+• Recurrent Neural Networks
+• LSTM
+• GRU
+• Transformer based models
+• BERT
+• Large Language Models (LLMs)
+Language Models
+What language models can do
+• Content generation
+• Part-of-speech (POS) tagging
+• Question answering
+• Text summarization
+• Sentiment analysis
+• Machine translation
+• Code completion
+• Conversational AI
+What language models can’t do
+• They can’t perform tasks that 
+involve
+• common-sense knowledge,
+• understanding abstract concepts, and
+• making inferences based on 
+incomplete information.
+• They also lack the ability to 
+• understand the world as humans do, 
+and they can't make decisions or take 
+actions in the physical world.
+Language Model
+
+Language Model
+
+Statistical Language Processing
+
+
+
+
+
+
+Bayes’ Theorem
+• Bayes' Theorem is a way of finding a probability when we know 
+certain other probabilities.
+• The formula is:
+
+Bayes’ Theorem
+
+Back to Language Models (LMs)
+
+N-grams
+
+
+How to compute P(W) 
+• How to compute this joint probability:
+• P(its, water, is, so, transparent, that)
+• Intuition: let’s rely on the Chain Rule of Probability
+
+
+
+Markov Assumption
+The assumption that the probability of a word depends only on the previous word(s) is
+called Markov assumption
+Simpest Case- Unigrams
+
+Bigram (2-gram)
+
+N-grams
+
+
+
+
+
+
+
+
+
+Estimating N-Gram Probabilities - Example 2:
+Berkeley Restaurant Project sentences
+
+Estimating N-Gram Probabilities - Example 2:
+Berkeley Restaurant Project sentences 
+Estimating N-Gram Probabilities - Example 2:
+Berkeley Restaurant Project sentences 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+References
+• NLP Course slides from 
+• University of Southern Maine
+(https://cs.usm.maine.edu/~behrooz.mansouri/)
+• Hacettepe University 
+(https://web.cs.hacettepe.edu.tr/~ilyas/Courses/BIL711/)
+• Stanford University 
+(https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/)
+"
+3,ch07,ch07.pdf,"Recurrent Neural Networks 
+(RNNs) and Long Short Term
+Memory Networks (LSTMs)
+RNNs
+LSTMs
+Recurrent Neural Networks 
+(RNNs)
+Recurrent Neural Networks (RNNs)
+
+Recurrent Neural Networks (RNNs)
+Why dont use ANNs?
+Problem with ANN
+
+Recurrent Neural Networks (RNNs)
+
+Recurrent Neural Networks (RNNs)
+
+Recurrent?
+
+Recurrent?
+
+Recurrent?
+
+Recurrent?
+
+Alternative Representations
+
+Alternative Representations
+
+h(t)?
+
+
+ANN vs RNN
+
+Recurrent Neural Networks (RNNs)
+• Language is an inherently temporal phenomenon. 
+o Language is a sequence of events over time. 
+• This temporal nature is reflected in some language processing algorithms. 
+o HMM part-of-speech tagging proceeds through the input a word at a time. 
+o Text classification tasks don’t have this temporal nature. They assume simultaneous access to 
+all aspects of their input. 
+• The feedforward networks also assumed simultaneous access, although they also had a simple 
+model for time. 
+o Feedforward networks to language modeling look at a fixed-size window of words, and then 
+sliding this window over the input. 
+• Recurrent Neural Networks (RNNs), and their variants like LSTMs are deep learning 
+architectures that offers an alternative way of representing time.
+What is a Recurrent Neural Network 
+(RNN)?
+• RNN is a deep neural network trained on sequential or time series data 
+to create a machine learning (ML) model that can make sequential 
+predictions or conclusions based on sequential inputs.
+• Recurrent Neural Networks introduce a mechanism where the output 
+from one step is fed back as input to the next, allowing them to retain 
+information from previous inputs. This design makes RNNs well-
+suited for tasks where context from earlier steps is essential, such as 
+predicting the next word in a sentence.
+Recurrent Neural Networks (RNNs)
+• RNNs have a mechanism that deals directly with the sequential nature of language, allowing them 
+to handle the temporal nature of language without the use of arbitrary fixed-sized windows. 
+• The recurrent network represents the prior context, in its recurrent connections, allowing the 
+model’s decision to depend on hundreds of words in the past. 
+• A recurrent neural network (RNN) is any network that contains a cycle within its network 
+connections, 
+o An input value of some unit is depends on its own earlier outputs as an input.
+Key Components of RNNs
+• Input Layer
+• Hidden Layer
+• Activation Function
+• Output Layer
+• Recurrent 
+Connection
+
+• Input Layer: This layer receives the initial element of the sequence 
+data. For example, in a sentence, it might receive the first word as a 
+vector representation.
+• Hidden Layer: The heart of the RNN, the hidden layer contains a set 
+of interconnected neurons. Each neuron processes the current input 
+along with the information from the previous hidden layer’s state. 
+This “state” captures the network’s memory of past inputs, allowing it 
+to understand the current element in context.
+• Activation Function: This function introduces non-linearity into the 
+network, enabling it to learn complex patterns. It transforms the 
+combined input from the current input layer and the previous hidden 
+layer state before passing it on.
+• Output Layer: The output layer generates the network’s prediction 
+based on the processed information. In a language model, it might 
+predict the next word in the sequence.
+• Recurrent Connection: A key distinction of RNNs is the recurrent 
+connection within the hidden layer. This connection allows the 
+network to pass the hidden state information (the network’s memory) 
+to the next time step. It’s like passing a baton in a relay race, carrying 
+information about previous inputs forward.
+Recurrent Neural Networks (RNNs) 
+simple recurrent neural network
+• Simple recurrent neural network 
+• The hidden layer includes a recurrent connection as part of its input. T
+o tprocessing, activation value of the hidden layer depends on the current 
+input as well as the activation value of the hidden layer from the 
+previous time step. 
+• The hidden layer from the previous time step provides a form of memory, 
+or context, that encodes earlier processing, and decisions can be made at 
+later points in time. 
+o This approach does not impose a fixed-length limit on this prior context. 
+o The context embodied in the previous hidden layer can include 
+information extending back to the beginning of the sequence
+
+Recurrent Neural Networks (RNNs) 
+Inference in RNNs
+• Forward inference (mapping a sequence of inputs to a 
+sequence of outputs) in an RNN is nearly identical to what 
+we’ve already seen with feedforward networks
+• Once we have the values for the hidden layer, we proceed with 
+the usual computation to generate the output vector.
+
+Recurrent Neural Networks (RNNs) 
+Inference in RNNs
+• The matrices U, V and W are shared across time, while new values for 
+h and y are calculated with each time step.
+
+Recurrent Neural Networks (RNNs) 
+Inference in RNNs
+
+Recurrent Neural Networks (RNNs) 
+Training RNNs
+• Fortunately, with modern computational frameworks and adequate computing resources, there is no 
+need for a specialized approach to training RNNs. 
+• Enrolling a recurrent network into a feedforward computational graph eliminates any explicit 
+recurrences, allowing the network weights to be trained directly. 
+• When presented with a specific input sequence, we can generate an unrolled feedforward network 
+specific to that input, and use that graph to perform forward inference or training via ordinary 
+backpropagation. 
+
+Types Of Recurrent Neural Networks
+• One-to-One RNN
+• One-to-Many RNN
+• Many-to-One RNN
+• Many-to-Many RNN
+One-to-One RNN
+• There is a single input and a single 
+output. Commonly used for 
+straightforward classification tasks 
+where input data points do not 
+depend on previous elements.
+
+One-to-Many RNN
+• In a One-to-Many RNN, the 
+network processes a single input 
+to produce multiple outputs over 
+time. This setup is beneficial 
+when a single input element 
+should generate a sequence of 
+predictions.For example, for 
+image captioning task, a single 
+image as input, the model 
+predicts a sequence of words as a 
+caption.
+
+Many-to-One RNN
+• The Many-to-One RNN receives a 
+sequence of inputs and generates a 
+single output. This type is useful 
+when the overall context of the 
+input sequence is needed to make 
+one prediction.  In sentiment 
+analysis, the model receives a 
+sequence of words (like a sentence) 
+and produces a single output, which 
+is the sentiment of the sentence 
+(positive, negative, or neutral).
+
+Many-to-Many RNN
+• The Many-to-Many RNN type 
+processes a sequence of inputs and 
+generates a sequence of outputs. This 
+configuration is ideal for tasks where 
+the input and output sequences need to 
+align over time, often in a one-to-one or 
+many-to-many mapping.  In language 
+translation task, a sequence of words in 
+one language is given as input, and a 
+corresponding sequence in another 
+language is generated as output.
+
+Recurrent Neural Network Architectures
+• Vanilla RNN
+• Bidirectional RNNs
+• Long Short-Term Memory Networks (LSTMs)
+• Gated Recurrent Units (GRUs)
+Vanilla RNN
+• Basic RNN that processes sequences step-by-step, using hidden states 
+to carry information. Effective for short sequences but struggles with 
+long-term dependencies due to vanishing gradients.
+Bidirectional RNNs
+• Bidirectional RNNs process inputs in both forward and backward 
+directions, capturing both past and future context for each time step. 
+This architecture is ideal for tasks where the entire sequence is 
+available, such as named entity recognition and question answering.
+Code
+
+Code*
+*Tensorflow
+
+Code
+
+Code
+
+*https://analyticsindiamag.com/ai-mysteries/lstm-vs-gru-in-recurrent-neural-network-a-comparative-study/
+Modern RNN ☺
+
+Modern RNN ☺
+
+Why modern RNNs?
+
+Lesson - I
+
+Long Short-Term Memory Networks (LSTMs)
+• LSTMs are a type of RNN designed to overcome the problem of 
+vanishing gradients, which can occur in vanilla RNNs. LSTMs 
+introduce memory cells and gates (input, output, and forget gates) that 
+control the flow of information, allowing the network to retain or 
+forget information over long sequences. LSTMs are widely used in 
+applications like language modeling, speech recognition, and time 
+series forecasting.
+LSTM
+• There are a total of three gates that LSTM uses asInput Gate, Forget 
+Gate, and Output Gate.
+• Input Gate :decides what information will be stored in long term memory. 
+• Forget Gate: decides which information from long term memory be kept or 
+discarded.
+• Output Gate: takes the current input, the previous short term memory and 
+newly computed long term memory to produce new short term memory 
+which will be passed on to the cell in the next time step. 
+LSTM
+
+LSTM
+
+Gated Recurrent Units (GRUs)
+• GRUs are a simplified version of LSTMs, combining the forget and 
+input gates into a single update gate. While GRUs are simpler and 
+faster than LSTMs, they perform comparably in many tasks. Like 
+LSTMs, GRUs are effective at learning long-term dependencies in 
+sequential data.
+GRU
+• GRU incorporates the two gate operating mechanisms called Update gate and Reset gate.
+• Update gate: responsible for determining the amount of previous information that needs to pass 
+along the next state.
+• Reset gate: decides how much of the past information is needed to neglect; in short, it decides 
+whether the previous cell state is important or not.
+• First, the reset gate comes into action it stores relevant information from the past time step into 
+new memory content. 
+• Then it multiplies the input vector and hidden state with their weights. 
+• Next, it calculates element-wise multiplication between the reset gate and previously hidden 
+state multiple. 
+• After summing up the above steps the non-linear activation function is applied and the next 
+sequence is generated.
+GRU
+
+Code
+
+Backpropagation Through Time (BPTT)
+• Backpropagation Through Time (BPTT) is an extension of the 
+standard backpropagation algorithm, designed specifically for training 
+Recurrent Neural Networks (RNNs). It accounts for the sequential 
+nature of RNNs, where each timestep depends on previous timesteps.
+The basic steps of BPTT in RNNs
+• Forward Pass: The hidden states and outputs are computed at each 
+time step.
+• Compute Loss: The computed outputs are compared to the desired 
+outputs (targets) to calculate the loss. The choice of loss function 
+depends on the specific task and the type of output.
+• Backward Pass: Starting from the last time step, gradients are 
+calculated with respect to the parameters of the network. The gradients 
+capture the influence of each parameter on the final loss. The gradients 
+are calculated using the chain rule, similar to traditional 
+backpropagation.
+• Gradient Updates: The gradients are used to update the network’s 
+parameters, such as the weight matrices and biases, in the direction 
+that minimizes the loss. This update step is typically performed using 
+an optimization algorithm like gradient descent or its variants.
+Vanishing and Exploding Gradients
+• Vanishing Gradients: Occur in RNNs when gradients shrink 
+exponentially during backpropagation, slowing or halting learning as 
+earlier layers fail to update effectively.
+• Exploding Gradients: Occur when gradients grow uncontrollably 
+during backpropagation, causing numerical instability and erratic 
+parameter updates.
+Recurrent Neural Networks 
+(RNNs) 
+• RNNs as Language Models
+RNNs as Language Models
+• Language models predict the next word in a sequence given some preceding context. 
+• Language models can assign a conditional probability to every possible next word. 
+• They can also assign probabilities to entire sequences by combining these conditional 
+probabilities with the chain rule: 
+
+RNNs as Language Models
+• The n-gram language models compute the probability of a word given counts of its occurrence 
+with the n-1 prior words. The context size is n-1. 
+• For the feedforward language models, the context size is the window size.
+• RNNs thus don’t have the limited context problem, since the hidden state can in principle 
+represent information about all of the preceding words. 
+o RNN language models process the input sequence one word at a time, attempting to predict 
+the next word from the current word and the previous hidden state. 
+
+RNNs as Language Models 
+Forward Inference
+• Forward inference is the task, given an input, of running a forward pass on the network to 
+produce a probability distribution over possible outputs (next words). 
+• The input sequence X=[x1 ,…, xn ] consists of a series of words each represented as a one-hot 
+vector of size |V|x1, 
+• The output prediction, y, is a vector representing a probability distribution over the vocabulary. 
+• At each step, the model uses the word embedding matrix E to retrieve the embedding for the 
+current word, and then combines it with the hidden layer from the previous step to compute a new 
+hidden layer. 
+• This hidden layer is then used to generate an output layer which is passed through a softmax layer 
+to generate a probability distribution over the entire vocabulary. 
+RNNs as Language Models 
+Forward Inference
+• At time t: 
+• E is embeddings (size: dx|V|), xt is one-hot vector (size: |V|x1) for the word wt in the input 
+sequence, et is the embedding (size: dx1) of the word wt . 
+• ht is the hidden layer output at time t (size: dhx1), W is the weight matrix for the input word (size: 
+dhx d), U is the weight matrix for the context (size: dhx dh ). 
+• V is the weight matrix for the output layer (size: |V|xdh ). 
+• Vht can be thought of as a set of scores over the vocabulary given the evidence provided in ht. 
+• yt : Passing these scores through the softmax normalizes the scores into a probability distribution 
+over the vocabulary. 
+
+RNNs as Language Models 
+Forward Inference
+• At time t:
+• The probability that a particular word k in the vocabulary is the next word at time t is 
+represented by yt [k], the kth component of yt:
+• The probability of an entire sequence is just the product of the probabilities of each item 
+in the sequence, where yi [wi ] is the probability of the true word wi at time step i.
+
+RNNs as Language Models 
+Training an RNN language model
+• self-supervision: To train an RNN as a language model, we take a corpus of text as training 
+material and at each time step t ask the model to predict the next word. 
+• We train the model to minimize the error in predicting the true next word in the training sequence, 
+using cross-entropy as the loss function. 
+o Recall that the cross-entropy loss measures the difference between a predicted probability 
+distribution and the correct distribution. 
+o The correct distribution yt comes from knowing the next word. 
+o At time t the CE loss is the negative log probability the model assigns to the next word in the 
+training sequence.
+
+RNNs as Language Models 
+Training an RNN language model
+• At each word position t, the model takes the correct sequence of tokens w1:t , and computes a 
+probability distribution over possible next words to compute model’s loss for next token wt+1.
+o Then we ignore what the model predicted for the next word and instead use the correct 
+sequence of tokens w1:t+1 to estimate the probability of token wt+2. 
+o The idea that the model use the correct history sequence to predict the next word (rather than 
+feeding the model its best case from the previous time step) is called teacher forcing.
+
+Recurrent Neural Networks 
+(RNNs) 
+• RNNs for other NLP tasks
+RNNs for Other NLP Tasks 
+Sequence Labeling
+• In sequence labeling, the network’s task is to assign a label chosen from a small fixed set of labels 
+to each element of a sequence, like the part-of-speech tagging. 
+• Part-of-speech tagging as sequence labeling with a simple RNN.
+o Pre-trained word embeddings serve as inputs and a softmax layer provides a probability 
+distribution over the part-of-speech tags as output at each time step.
+
+RNNs for Other NLP Tasks 
+RNNs for Sequence Classification – Text Classification
+• RNNs can classify entire sequences rather than the tokens within them. 
+• The text to be classified is passed through the RNN a word at a time generating a new hidden layer 
+at each time step. 
+• The hidden layer for the last token of the text, hn, to constitute a compressed representation of the 
+entire sequence. 
+• hn is given to a feedforward network that chooses a class via a softmax function.
+
+RNNs for Other NLP Tasks 
+RNNs for Sequence Classification – Text Classification
+• No need intermediate outputs for the words in the sequence 
+preceding the last element. 
+o Therefore, there are no loss terms associated with those 
+elements. 
+o Instead, the loss function used to train the weights in the 
+network is based entirely on the final text classification task. 
+o The output from the softmax output from the feedforward 
+classifier together with a crossentropy loss drives the training. 
+o The error signal from the classification is backpropagated all 
+the way through the weights in the feedforward classifier 
+through, and then through to the three sets of weights in the 
+RNN 
+• Instead of using just last token hn to represent the whole pooling 
+sequence, we can use a pooling function of all hidden states hi . 
+• A representation that pools all the n hidden states by taking their 
+element-wise mean:
+
+RNNs for Other NLP Tasks 
+Generation with RNN-Based Language Models
+• RNN-based language models can also be used to generate text. 
+o Text generation is of enormous practical importance any task where a system needs to produce 
+text such as question answering, machine translation, text summarization. 
+o Text generation constitute a new area of AI that is often called generative AI. 
+• Using a language model to incrementally generate words by repeatedly sampling the next word 
+conditioned on our previous choices is called autoregressive generation.
+
+RNNs for Other NLP Tasks 
+Generation with RNN-Based Language Models
+• Autoregressive generation architecture is applicable to many NLP applications such as machine 
+translation, summarization, and question answering. 
+o The key is to prime the generation component with an appropriate context. 
+o Instead of simply using <s> to get things started we can provide a richer task-appropriate 
+context; for translation the context is the sentence in the source language; for summarization 
+it’s the long text we want to summarize.
+
+Recurrent Neural Networks 
+(RNNs) 
+• Stacked and Bidirectional RNN architectures
+Stacked RNNs
+• Recurrent networks are quite flexible. 
+o The entire sequence of outputs from one RNN as an input sequence to another one. 
+• Stacked RNNs consist of multiple networks where the output of one layer serves as the input to a 
+subsequent layer.
+    Stacked recurrent networks. 
+• The output of a lower level serves as the input to higher levels with 
+the output of the last network serving as the final output. 
+• Stacked RNNs generally outperform single-layer networks. 
+• As the number of stacks is increased the training costs rise quickly.
+
+Bidirectional RNNs
+• The RNN uses information from the left context to make its predictions at time t. 
+• But many NLP applications may require right context in addition to left context. 
+• A bidirectional RNN combines two independent RNNs, one where the input is processed from the 
+start to the end, and the other from the end to the start. 
+o We then concatenate the two representations computed by the networks into a single vector that 
+captures both the left and right contexts of an input at each point in time.
+    A bidirectional RNN 
+• Separate models are trained in the forward and backward directions, 
+with the output of each model at each time point concatenated to 
+represent the bidirectional state at that time point.
+
+Bidirectional RNNs
+A bidirectional RNN for sequence classification: 
+• The final hidden units from the forward and backward passes are combined to represent the entire 
+sequence. 
+• This combined representation serves as input to the subsequent classifier.
+
+LSTM (long short-term memory) 
+Network
+LSTM 
+shortcomings of RNNs – distant information
+• Distant information is critical to many language applications. 
+• To train RNNs is difficult to make use of information distant from the current point of processing. 
+o Alhough RNNs access to the entire preceding sequence, the information encoded in hidden 
+states tends to be fairly local, more relevant to the most recent parts of the input. 
+Example: The flights the airline was canceling were full. 
+• Assigning a high probability to was following airline is straightforward since airline provides a 
+strong local context for the singular agreement. 
+• However, assigning an appropriate probability to were is quite difficult, not only because the plural 
+flights is quite distant, but also because the singular noun airline is closer in the intervening 
+context. 
+• Ideally, a network should be able to retain the distant information about plural flights until it 
+is needed, while still processing the intermediate parts of the sequence correctly.
+LSTM
+shortcomings of RNNs – distant information
+Reasons for the inability of RNNs to carry forward critical information 
+1. The weights in the hidden layer are being asked to perform two tasks simultaneously: 
+o provide information useful for the current decision, and 
+o updating and carrying forward information required for future decisions. 
+2. Training RNNs needs to backpropagate the error signal back through time. 
+o The hidden layer at time t contributes to the loss at the next time step since it takes part in that calculation. 
+o During the backward pass of training, the hidden layers are subject to repeated multiplications, as 
+determined by the length of the sequence. 
+o A frequent result of this process is that the gradients are eventually driven to zero, a situation called the 
+vanishing gradients problem. 
+• More complex network architectures are designed to explicitly manage the task of maintaining relevant context 
+over time, 
+o by enabling the network to learn to forget information that is no longer needed and 
+o to remember information required for decisions still to come. 
+     ➔ LSTM 
+LSTM
+• The long short-term memory (LSTM) networks which are extensions of RNNs are designed to 
+solve context management problem. 
+• LSTMs divide the context management problem into two subproblems: 
+o removing information no longer needed from the context, and 
+o adding information likely to be needed for later decision making. 
+• LSTMs accomplish the context management problem 
+o Adding an explicit context layer to the architecture (in addition to hidden layer), and
+o Use of specialized neural units that make use of gates to control the flow of information into 
+and out of the units that comprise the network layers. 
+o These gates are implemented through the use of additional weights that operate sequentially on 
+the input, and previous hidden layer, and previous context layers. 
+LSTM 
+gates
+The gates in an LSTM share a common design pattern: 
+• Each consists of a feedforward layer, followed by a sigmoid activation function, 
+followed by a pointwise multiplication with the layer being gated. 
+• The sigmoid activation function is preferred because it pushes its outputs to 0 or 1. 
+• A pointwise multiplication of the sigmoid function output and the layer being gated has 
+an effect similar to that of a binary mask of the layer. 
+• Values in the layer being gated that align with values near 1 in the mask are passed 
+through nearly unchanged; values corresponding to lower values are essentially erased. 
+LSTM 
+Gates – forget gate
+• The purpose of forget gate is to delete information from the context that is no longer needed. 
+o The forget gate computes a weighted sum of the previous state’s hidden layer and the current input 
+and passes that through a sigmoid. 
+o This mask is then multiplied element-wise by the context vector to remove the information 
+from context that is no longer required. 
+
+LSTM 
+Gates – add gate
+• The next task is to compute the actual information we need to extract from the previous hidden 
+state and current inputs.
+• We generate the mask for the add gate to select the information to add to the current context. We 
+add this to the modified context vector to get our new context vector.
+
+LSTM 
+Gates – output gate
+• The output gate is used to decide what information is required for the current hidden state.
+
+LSTM 
+A single LSTM unit
+• A single LSTM unit displayed as a computation graph: 
+o The inputs to each unit consists of current input xt , previous hidden state ht-1 , and 
+previous context ct-1 . 
+o The outputs are a new hidden state ht and an updated context ct . 
+
+LSTM 
+LSTM units
+• The neural units used in LSTMs are obviously much more complex than those used in basic 
+feedforward networks, simple RNNs.
+
+Encoder-Decoder Model with RNNs
+Encoder-Decoder Model with RNNs 
+Four architectures for NLP tasks
+
+Encoder-Decoder Model with RNNs
+• The encoder-decoder model takes an input sequence and translates it to an output sequence that is 
+of a different length than the input. 
+o Encoder-decoder models are used especially for tasks like machine translation, where the 
+input sequence and output sequence can have different lengths and the mapping between a 
+token in the input and a token in the output can be very indirect. 
+• The key idea underlying these networks is the use of an encoder network that takes an input 
+sequence and creates a contextualized representation of it, often called the context. 
+o This context representation is then passed to a decoder which generates a task specific output 
+sequence.
+
+Encoder-Decoder Model with RNNs 
+The encoder-decoder architecture
+Encoder-decoder networks consist of three conceptual components: 
+1. An encoder that accepts an input sequence, x1:n, and generates a corresponding sequence of contextualized 
+representations, h1:n. 
+o LSTMs, convolutional networks, and transformers can all be employed as encoders. 
+2. A context vector c, which is a function of h1:n, and conveys the essence of the input to the decoder. 
+3. A decoder, which accepts c as input and generates an arbitrary length sequence of hidden states h1:m, from 
+which a corresponding sequence of output states y1:m, can be obtained. 
+o Just as with encoders, decoders can be realized by any kind of sequence architecture (RNNs, LSTMs, 
+transformers).
+
+Encoder-Decoder Model with RNNs
+• Translating a single sentence in the basic RNN version of encoder-decoder approach to 
+machine translation. 
+o Source and target sentences are concatenated with a separator token in between, and the 
+decoder uses context information from the encoder’s last hidden state.
+
+Encoder-Decoder Model with RNNs
+• A formal version of translating a sentence in the basic RNN-based encoder-decoder 
+architecture: 
+
+Encoder-Decoder Model with RNNs 
+basic RNN-based encoder-decoder architecture
+
+Encoder-Decoder Model with RNNs 
+basic RNN-based encoder-decoder architecture
+• Equations for the decoder, with context available at each decoding timestep.
+• The output y at each time step consists of a softmax computation over the set of possible outputs 
+(the vocabulary).
+• We compute the most likely output at each time step by taking the argmax over the softmax output:
+
+Encoder-Decoder Model with RNNs 
+basic RNN-based encoder-decoder architecture - Training
+• Training the basic RNN encoder-decoder approach to machine translation. 
+o Note that in the decoder we usually don’t propagate the model’s softmax outputs ŷt, but use 
+teacher forcing to force each input to the correct gold value for training. 
+o We compute the softmax output distribution over ˆ ŷ in the decoder in order to compute the 
+loss at each token, which can then be averaged to compute a loss for the sentence.
+
+Encoder-Decoder Model with 
+RNNs
+ • Attention
+Encoder-Decoder Model with RNNs - Attention
+• Requiring the context c to be only the encoder’s final hidden state forces all the information 
+from the entire source sentence to pass through this representational bottleneck.
+• The attention mechanism is a solution to the bottleneck problem,
+• The attention mechanism allows the decoder to get information from all the hidden states of the 
+encoder, not just the last hidden state.
+
+Encoder-Decoder Model with RNNs - Attention
+• The idea of attention is to create the single fixed-length vector c by taking a weighted sum of 
+all the encoder hidden states. 
+• The weights focus on (‘attend to’) a particular part of the source text that is relevant for the token 
+the decoder is currently producing. 
+• Attention thus replaces the static context vector with one that is dynamically derived from the 
+encoder hidden states, different for each token in decoding.
+
+Encoder-Decoder Model with RNNs - Attention
+
+Encoder-Decoder Model with RNNs - Attention
+
+Recurrent Neural Networks 
+(RNNs) - Summary
+Recurrent Neural Networks (RNNs) - Summary
+• In simple Recurrent Neural Networks sequences are processed one element at a time, with the 
+output of each neural unit at time t based both on the current input at t and the hidden layer from 
+time t-1. 
+• RNNs can be trained with a straightforward extension of the backpropagation algorithm, known as 
+backpropagation through time (BPTT). 
+• Simple recurrent networks fail on long inputs because of problems like vanishing gradients; 
+modern systems use more complex gated architectures such as LSTMs that explicitly decide what 
+to remember and forget in their hidden and context layers.
+Recurrent Neural Networks (RNNs) - Summary
+Common language-based applications for RNNs include: 
+• Probabilistic language modeling: assigning a probability to a sequence, or to the next element of 
+a sequence given the preceding words. 
+• Auto-regressive generation using a trained language model. 
+• Sequence labeling like part-of-speech tagging, where each element of a sequence is assigned a 
+label. 
+• Sequence classification, where an entire text is assigned to a category, as in spam detection, 
+sentiment analysis or topic classification. 
+• Encoder-decoder architectures, where an input is mapped to an output of different length and 
+alignment.
+"
+4,FunctionalProgramming,FunctionalProgramming.pdf,"FUNCTIONAL 
+PROGRAMMING
+SENG 426
+Introduction
+• The design of the imperative languages is 
+based directly on the von Neumann 
+architecture
+– Efficiency is the primary concern,
+rather than the suitability of the 
+language for software development
+• The design of the functional languages is 
+based on mathematical functions
+– A solid theoretical basis that is also 
+closer to the user, but relatively 
+unconcerned with the architecture of the
+machines on which programs will run
+
+Fundamentals of Functional 
+Programming Languages
+• The objective of the design of a FPL is to mimic 
+mathematical functions to the greatest extent possible
+• The basic process of computation is fundamentally 
+different in a FPL than in an imperative language
+– In an imperative language, operations are done and the 
+results are stored in variables for later use
+– Management of variables is a constant concern and 
+source of complexity for imperative programming
+• In an FPL, variables are not necessary, as is the case in 
+mathematics
+• Referential Transparency - In an FPL,
+the evaluation of a function always 
+produces the same result given the 
+same parameters
+
+Mathematical Functions
+• A mathematical function is a mapping of 
+members of one set, called the domain set, 
+to another set, called the range set
+• A lambda expression specifies the 
+parameter(s) and the mapping of
+a function in the following form
+(x) x * x * x
+for the function  
+cube(x) = x * x * x
+(x) x * x * x(x) x * x * x
+cube(x) = x * x * xcube(x) = x * x * x
+Lambda Expressions
+• Lambda expressions describe nameless 
+functions
+• Lambda expressions are applied to 
+parameter(s) by placing the parameter(s) 
+after the expression
+ e.g.,   ((x) x * x * x)(2)
+ which evaluates to 8
+((x) x * x * x)(2)((x) x * x * x)(2)
+Functional Forms
+A higher-order function, or functional form, 
+is one that either takes functions as 
+parameters or yields a function as its result, 
+or both
+f( g(x) )f( g(x) )
+f( g(x) ) → h(y)f( g(x) ) → h(y)
+Function Composition
+• A functional form that takes two functions 
+as parameters and yields a function whose 
+value is the first actual parameter function 
+applied to the application of the second
+ Form: h  f ° g
+ which means h (x)  f ( g ( x))
+ For f (x)  x + 2 and  g (x)  3 * x,
+ h  f ° g yields (3 * x)+ 2
+h  f ° gh  f ° g
+h(x)  f ( g(x) )h(x)  f ( g(x) )
+f(x) x + 2f(x) x + 2 g(x) 3 * xg(x) 3 * x
+h  f ° gh  f ° g (3 * x)+ 2(3 * x)+ 2
+Apply-to-all (map)
+• A functional form that takes a single 
+function as a parameter and yields a list of 
+values obtained by applying the given 
+function to each element of a list of 
+parameters
+ Form: 
+ For h(x)  x * x
+ (h, (2, 3, 4)) yields  (4, 9, 16)
+h(x)  x * xh(x)  x * x
+(h, (2, 3, 4))(h, (2, 3, 4)) (4, 9, 16)(4, 9, 16)
+
+Lisp Data Types and Structures
+• Data object types: originally only atoms and 
+lists
+• List form: parenthesized collections of 
+sublists and/or atoms
+ e.g., (A B (C D) E)
+• Originally, Lisp was a typeless language
+• Lisp lists are stored internally as single-
+linked lists
+(A B (C D) E)(A B (C D) E)
+Lisp Interpretation
+• Lambda notation is used to specify functions and 
+function definitions. Function applications and data 
+have the same form.
+ e.g., If the list (A B C) is interpreted as data it is
+ a simple list of three atoms, A, B, and C
+ If it is interpreted as a function application,
+ it means that the function named A is
+ applied to the two parameters, B and C
+(A B C)(A B C)
+List Types (continued)
+• List Operations in Scheme (Lisp dialect)
+– CAR returns the first element of its list parameter
+   (CAR ′(A B C)) returns A
+– CDR returns the remainder of its list parameter 
+after the first element has been removed
+   (CDR ′(A B C)) returns (B C)
+ - CONS puts its first parameter into its second 
+parameter, a list, to make a new list
+ (CONS ′A (B C)) returns (A B C)
+- LIST returns a new list of its parameters
+ (LIST ′A ′B ′(C D)) returns (A B (C D))
+(car ′(A B C))(car ′(A B C))
+(cdr ′(A B C))(cdr ′(A B C))
+(cons ′A ′(B C))(cons ′A ′(B C))
+(list ′A ′B ′(C D))(list ′A ′B ′(C D))
+Origins of Scheme
+• A mid-1970s dialect of Lisp, 
+designed to be a cleaner, more 
+modern, and simpler version than 
+the contemporary dialects of Lisp
+• Uses only static scoping
+• Functions are first-class entities
+– They can be the values of expressions and 
+elements of lists
+– They can be assigned to variables, passed as 
+parameters, and returned from functions
+
+The Scheme Interpreter
+• In interactive mode, the Scheme interpreter 
+is an infinite read-evaluate-print loop 
+(REPL)
+– This form of interpreter is also used by Python 
+and Ruby
+• Expressions are interpreted by the function 
+EVAL
+• Literals evaluate to themselves
+
+Primitive Function Evaluation
+• Parameters are evaluated, in no particular order
+• The values of the parameters are substituted into 
+the function body
+• The function body is evaluated
+• The value of the last expression in the body is the 
+(return) value of the function
+(lambda (p1 p2)
+...
+(+ (+ p1 p2) (/ p1 p2) )
+)
+(lambda (p1 p2)
+...
+(+ (+ p1 p2) (/ p1 p2) )
+)
+Primitive Functions & LAMBDA Expressions
+•  Primitive Arithmetic Functions: +, -, *, /, ABS, SQRT, 
+  REMAINDER, MIN, MAX
+      e.g., (+ 5 2) yields 7
+• Lambda Expressions
+– Form is based on  notation
+     e.g., (LAMBDA (x) (* x x))
+     x is called a bound variable
+• Lambda expressions can be applied to parameters
+ e.g., ((LAMBDA (x) (* x x)) 7)
+• LAMBDA expressions can have any number of parameters
+    (LAMBDA (a b x) (+ (* a x x) (* b x)))
+(+ 5 2)(+ 5 2)
+(lambda (x) (* x x))(lambda (x) (* x x))
+((lambda (x) (* x x)) 7)((lambda (x) (* x x)) 7)
+(lambda (a b x) (+ (* a x x) (* b x)))(lambda (a b x) (+ (* a x x) (* b x)))
+Special Form Function: DEFINE
+DEFINE - Two forms:
+1. To bind a symbol to an expression
+ e.g., (DEFINE pi 3.141593)
+ Example use: (DEFINE two_pi (* 2 pi))
+   These symbols are not variables – they are like the names 
+bound by Java’s final declarations
+2. To bind names to lambda expressions (LAMBDA is 
+implicit)
+ e.g., (DEFINE (square x) (* x x))
+ Example use: (square 5)
+(define pi 3.141593)(define pi 3.141593)
+(define two_pi (* 2 pi))(define two_pi (* 2 pi))
+(define (square x) (* x x))(define (square x) (* x x))
+(square 5)(square 5)
+Output Functions
+• Usually not needed, because the interpreter always 
+displays the result of a function evaluated at the 
+top level (not nested)
+• Scheme has DISPLAY, which is similar to the 
+printf function of C
+• Note: explicit input and output are not part of the 
+pure functional programming 
+model, because input operations 
+change the state of the program 
+and output operations are side 
+effects
+
+Numeric Predicate Functions
+• #T (or #t) is true and #F (or #f) is false 
+(sometimes () is used for false)
+• =, <>, >, <, >=, <=
+• EVEN?, ODD?, ZERO?, NEGATIVE?
+• The NOT function inverts the logic of a 
+Boolean expression
+=, <>, >, <, >=, <==, <>, >, <, >=, <=
+even?, odd?, zero?, negative?even?, odd?, zero?, negative?
+notnot
+Control Flow
+• Selection- the special form, IF
+ (IF predicate then_exp else_exp)
+  (IF (<> count 0)
+      (/ sum count)
+  )
+• The COND function:
+(DEFINE (leap? year)
+   (COND
+     ((ZERO? (MODULO year 400)) #T)
+     ((ZERO? (MODULO year 100)) #F)
+     (ELSE (ZERO? (MODULO year 4)))
+(if (<> count 0)
+(/ sum count)
+)
+(if (<> count 0)
+(/ sum count)
+)
+(define (leap? year)
+   (cond
+     ((zero? (modulo year 400)) #T)
+     ((zero? (modulo year 100)) #F)
+     (else (zero? (modulo year 4)))
+))
+(define (leap? year)
+   (cond
+     ((zero? (modulo year 400)) #T)
+     ((zero? (modulo year 100)) #F)
+     (else (zero? (modulo year 4)))
+))
+List Functions
+• QUOTE - takes one parameter; returns the 
+parameter without evaluation 
+– QUOTE is required because the Scheme interpreter, 
+named EVAL, always evaluates parameters to function 
+applications before applying the function.  QUOTE is 
+used to avoid parameter evaluation when it is not 
+appropriate
+– QUOTE can be abbreviated with the apostrophe (single 
+quote) prefix operator
+    '(A B) is equivalent to (QUOTE (A B)) '(A B)'(A B) (quote (A B))(quote (A B))
+List Functions (continued)
+• Examples:
+  (car ′((A B) C D)) returns
+  (car ′A) returns
+  (cdr ′((A B) C D)) returns 
+  (cdr ′A) returns
+  (cdr ′(A)) returns
+  (cons ′() ′(A B)) returns 
+  (cons ′(A B) ′(C D)) returns 
+  (cons ′A ′B) returns
+(A B)
+error
+(C D)
+error
+()
+(() A B)
+((A B) C D)
+(A . B)
+List Functions (continued)
+LIST is a function for building a list from any 
+number of parameters
+   (LIST ′apple ′orange ′grape) returns
+    (apple orange grape)
+(list ′apple ′orange ′grape)(list ′apple ′orange ′grape)
+Predicate Function: EQ?
+EQ? takes two expressions as parameters 
+(usually two atoms); it returns #T if both 
+parameters have the same pointer value; 
+otherwise #F
+ (EQ? 'A ‘A) yields #T
+  (EQ? 'A ‘B) yields #F
+ (EQ? 'A '(A B)) yields #F
+  (EQ? '(A B) '(A B)) yields #T or #F (avoid using)
+  (EQ? 3.4 (+ 3 0.4))) yields #T or #F (avoid using)
+(eq? 'A 'A)(eq? 'A 'A)
+(eq? 'A 'B)(eq? 'A 'B)
+(eq? 'A '(A B))(eq? 'A '(A B))
+(eq? '(A B) '(A B))(eq? '(A B) '(A B))
+(eq? 3.4 (+ 3 0.4)))(eq? 3.4 (+ 3 0.4)))
+Predicate Function: EQV?
+EQV? is like EQ?, except that it works for both 
+symbolic and numeric atoms; it is a value 
+comparison, not a pointer comparison
+   (EQV? 3 3) yields #T
+  (EQV? 'A 3) yields #F
+  (EQV 3.4 (+ 3 0.4)) yields #T
+  (EQV? 3.0 3) yields #F (floats and integers are
+ different)
+(eqv? 3 3)(eqv? 3 3)
+(eqv? 'A 3)(eqv? 'A 3)
+(eqv? 3.4 (+ 3 0.4))(eqv? 3.4 (+ 3 0.4))
+(eqv? 3.0 3)(eqv? 3.0 3)
+Predicate Functions: LIST? and NULL?
+• LIST? takes one parameter; it returns #T if the 
+parameter is a list; otherwise #F
+  (LIST? '()) yields #T                  yields #F
+• NULL? takes one parameter; it returns #T if the 
+parameter is the empty list; otherwise #F
+  (NULL? '(())) yields #F
+      yields #T
+(list? '())(list? '())
+(null? '(()))(null? '(()))
+(list? 2)(list? 2)
+(null? '())(null? '())
+Example Scheme Function: member
+member takes an atom and a simple list; 
+returns #T if the atom is in the list; #F 
+otherwise
+ DEFINE (member atm a_list)
+ (COND
+  ((NULL? a_list) #F)
+  ((EQ? atm (CAR lis)) #T)
+  ((ELSE (member atm (CDR a_list)))
+ 
+(define (member atm a_list)
+(cond
+((null? a_list) #F)
+((eq? atm (car a_list)) #T)
+(else (member atm (cdr a_list)))
+)
+)    
+(define (member atm a_list)
+(cond
+((null? a_list) #F)
+((eq? atm (car a_list)) #T)
+(else (member atm (cdr a_list)))
+)
+)    
+Example Scheme Function: equalsimp
+equalsimp takes two simple lists as parameters; 
+returns #T if the two simple lists are equal; #F 
+otherwise
+ (DEFINE (equalsimp list1 list2)
+ (COND
+  ((NULL? list1) (NULL? list2))
+  ((NULL? list2) #F)
+  ((EQ? (CAR list1) (CAR list2))
+   (equalsimp(CDR list1)(CDR list2
+  (ELSE #F)
+ ))
+(define (equalsimp list1 list2)
+(cond
+((null? list1) (null? list2))
+((null? list2) #F)
+((eq? (car list1) (car list2))
+ (equalsimp(cdr list1)(cdr list2)))
+(else #F)
+)
+)
+(define (equalsimp list1 list2)
+(cond
+((null? list1) (null? list2))
+((null? list2) #F)
+((eq? (car list1) (car list2))
+ (equalsimp(cdr list1)(cdr list2)))
+(else #F)
+)
+)
+Example Scheme Function: equal
+equal takes two general lists as parameters;  returns 
+#T if the two lists are equal; #F otherwise
+ (DEFINE (equal list1 list2)
+   (COND
+  ((NOT (LIST? list1))(EQ? list1 list2))
+  ((NOT (LIST? list2)) #F)
+  ((NULL? list1) (NULL? list2))
+  ((NULL? list2) #F)
+  ((equal (CAR list1) (CAR list2))
+   (equal (CDR list1) (CDR list2)))
+  (ELSE #F)
+ 
+(define (equal list1 list2)
+(cond
+((not (list? list1))(eq? list1 list2))
+((not (list? list2)) #F)
+((null? list1) (null? list2))
+((null? list2) #F)
+((equal (car list1) (car list2))
+ (equal (cdr list1) (cdr list2)))
+(else #F)
+)
+)
+(define (equal list1 list2)
+(cond
+((not (list? list1))(eq? list1 list2))
+((not (list? list2)) #F)
+((null? list1) (null? list2))
+((null? list2) #F)
+((equal (car list1) (car list2))
+ (equal (cdr list1) (cdr list2)))
+(else #F)
+)
+)
+Example Scheme Function: append
+append takes two lists as parameters; returns the 
+first parameter list with the elements of the second 
+parameter list appended at the end
+ (DEFINE (append list1 list2)
+   (COND
+  ((NULL? list1) list2)
+  (ELSE (CONS (CAR list1)
+     (append (CDR list1) list2)))
+ ))
+(define (append list1 list2)
+(cond
+((null? list1) list2)
+(else (cons (car list1)
+  (append (cdr list1) list2)))
+)
+)
+(define (append list1 list2)
+(cond
+((null? list1) list2)
+(else (cons (car list1)
+  (append (cdr list1) list2)))
+)
+)
+Example Scheme Function: LET
+• LET is actually shorthand for a LAMBDA 
+expression applied to a parameter
+     (LET ((alpha 7))(* 5 alp
+   is same as:
+   ((LAMBDA (alpha) (* 5 alpha)  
+(let ((alpha 7))(* 5 alpha))(let ((alpha 7))(* 5 alpha))
+((lambda (alpha) (* 5 alpha)) 7)((lambda (alpha) (* 5 alpha)) 7)
+LET Example
+(DEFINE (quadratic_roots a b c)
+ (LET (
+   (root_part_over_2a 
+  (/ (SQRT (- (* b b) (* 4 a c)))(* 2 a)))
+   (minus_b_over_2a (/ (- 0 b) (* 2 a)))
+ (LIST (+ minus_b_over_2a root_part_over_2a))
+    (- minus_b_over_2a root_part_over_2a))
+))
+(define (quadratic_roots a b c)
+(let ((root_part_over_2a 
+ (/ (sqrt (- (* b b) (* 4 a c)))(* 2 a))
+   (minus_b_over_2a 
+(/ (- 0 b) (* 2 a)))
+ (list (+ minus_b_over_2a 
+root_part_over_2a))
+   (- minus_b_over_2a 
+root_part_over_2a))
+)
+)
+(define (quadratic_roots a b c)
+(let ((root_part_over_2a 
+ (/ (sqrt (- (* b b) (* 4 a c)))(* 2 a))
+   (minus_b_over_2a 
+(/ (- 0 b) (* 2 a)))
+ (list (+ minus_b_over_2a 
+root_part_over_2a))
+   (- minus_b_over_2a 
+root_part_over_2a))
+)
+)
+Tail Recursion in Scheme
+• Definition: A function is tail recursive if its 
+recursive call is the last 
+operation in the function
+• A tail recursive function can 
+be automatically converted 
+by a compiler to use iteration, 
+making it faster
+• Scheme language definition requires that 
+Scheme language systems convert all tail 
+recursive functions to use iteration
+
+Tail Recursion in Scheme - continued
+Example of rewriting a function to make it tail 
+recursive, using helper a function
+   Original:         (DEFINE (factorial n)
+                      (IF (<= n 0)
+                         1
+                         (* n (factorial (- n 1)))
+                    ))
+   Tail recursive:
+(define (factorial n)
+(if (<= n 0)
+1
+      (* n (factorial (- n 1)))
+))
+(define (factorial n)
+(if (<= n 0)
+1
+      (* n (factorial (- n 1)))
+))
+(define (helper n accumulated)
+(if (<= n 0)
+accumulated
+      (helper (- n 1) (* n accumulated)))
+))
+(define (factorial n)
+(helper n 1))
+(define (helper n accumulated)
+(if (<= n 0)
+accumulated
+      (helper (- n 1) (* n accumulated)))
+))
+(define (factorial n)
+(helper n 1))
+Functional Form - Composition
+• Composition
+– If h is the composition of f and g, h(x) = f(g(x))
+  (DEFINE (g x) (* 3 x))
+  (DEFINE (f x) (+ 2 x))
+  (DEFINE h x) (+ 2 (* 3 x))  (The composition)
+– In Scheme, the functional composition function compose 
+can be written:
+   (DEFINE (compose f g) (LAMBDA (x) (f (g x)
+  ((compose CAR CDR) '((a b) c d yields c
+   (DEFINE (third a_list)
+      ((compose CAR (compose CDR CDR)) a_list))
+    is equivalent to CADDR
+(define (g x) (* 3 x))(define (g x) (* 3 x))
+(define (f x) (+ 2 x))(define (f x) (+ 2 x))
+(define (h x) (+ 2 (* 3 x)))(define (h x) (+ 2 (* 3 x)))
+(define (compose f g) (lambda (x) (f (g x))))(define (compose f g) (lambda (x) (f (g x))))
+((compose car cdr) '((a b) c d))((compose car cdr) '((a b) c d))
+(define (third a_list)
+((compose car (compose cdr cdr)) a_list))
+(define (third a_list)
+((compose car (compose cdr cdr)) a_list))
+Functional Form – Apply-to-All
+• Apply to All - one form in Scheme is map 
+– Applies the given function to all elements of the given list; 
+ (DEFINE (map fun a_list)
+   (COND
+     ((NULL? a_list) '())
+     (ELSE (CONS (fun (CAR a_list))
+      (map fun (CDR a_list))))
+ ))
+(map (LAMBDA (num) (* num num num)) '(3 4 2 6)) yields
+ (27 64 8 216)
+(define (map fun a_list)
+(cond
+((null? a_list) '())
+(else (cons (fun (car a_list))
+ (map fun (cdr a_list))))
+)
+)
+(define (map fun a_list)
+(cond
+((null? a_list) '())
+(else (cons (fun (car a_list))
+ (map fun (cdr a_list))))
+)
+)
+(map (lambda (num) (* num num num)) '(3 4 2 6))(map (lambda (num) (* num num num)) '(3 4 2 6))
+Functions That Build Code
+• It is possible in Scheme to define a function 
+that builds Scheme code and requests its 
+interpretation
+• This is possible because the interpreter is a 
+user-available function, EVAL
+Adding a List of Numbers
+((DEFINE (adder a_list)
+   (COND
+     ((NULL? a_list) 0)
+     (ELSE (EVAL (CONS '+ a_list)))
+ 
+•  The parameter is a list of numbers to be added; 
+adder inserts a + operator and evaluates the 
+resulting list
+– Use CONS to insert the atom + into the list of numbers.
+– Be sure that + is quoted to prevent evaluation
+– Submit the new list to EVAL for evaluation
+ 
+(define (adder a_list)
+(cond
+((null? a_list) 0)
+(else (eval (cons '+ a_list)))
+)
+)
+(define (adder a_list)
+(cond
+((null? a_list) 0)
+(else (eval (cons '+ a_list)))
+)
+)
+Backquote and Quote
+Backquote operator (`)
+– Similar to the Scheme’s QUOTE, except that some 
+parts of the parameter can be unquoted by 
+preceding them with commas
+   `(a (* 3 4) c) evaluates to (a (* 3 4) c)
+  `(a ,(* 3 4) c) evaluates to (a 12 c)
+   
+`(a (* 3 4) c)`(a (* 3 4) c) (a (* 3 4) c)(a (* 3 4) c)
+(a 12 c)(a 12 c)`(a ,(* 3 4) c)`(a ,(* 3 4) c)
+Common Lisp
+• A combination of many of the features of the 
+popular dialects of Lisp around in the early 1980s
+• A large and complex language--the opposite of 
+Scheme
+• Features include:
+– records 
+– arrays 
+– complex numbers
+– character strings
+– powerful I/O capabilities
+– packages with access control
+– iterative control statements
+Haskell
+• Static scoped, strongly typed, type inferencing, pattern 
+matching
+• Purely functional (e.g., no variables, no assignment 
+statements, and no side effects of any kind)
+Syntax:
+  factorial :: Integer -> Integer
+factorial 0 = 1
+factorial n = n * factorial (n-1)
+ fibonacci :: Integer -> Integer
+fibonacci 0 = 1
+fibonacci 1 = 1
+fibonacci n = fibonacci(n-1) + fibonacci (n-2)
+factorial :: Integer -> Integer
+factorial 0 = 1
+factorial n = n * factorial (n-1)
+factorial :: Integer -> Integer
+factorial 0 = 1
+factorial n = n * factorial (n-1)
+fibonacci :: Integer -> Integer
+fibonacci 0 = 1
+fibonacci 1 = 1
+fibonacci n = fibonacci(n-1) + fibonacci (n-2)
+fibonacci :: Integer -> Integer
+fibonacci 0 = 1
+fibonacci 1 = 1
+fibonacci n = fibonacci(n-1) + fibonacci (n-2)
+Haskell Lists
+• List notation: Put elements in brackets
+ directions = [""north"", ""south"", ""east"", ""west""]
+• Length: # 
+ #directions is 4
+• Arithmetic series with the .. operator
+ [2, 4..10] is [2, 4, 6, 8, 10]
+• Catenation is with ++
+ [1, 3] ++ [5, 7] results in [1, 3, 5, 7]
+• CONS via the colon operator
+ 1:[3, 5, 7] results in [1, 3, 5, 7]
+directions = [""north"", ""south"", ""east"", ""west""]directions = [""north"", ""south"", ""east"", ""west""]
+#directions#directions
+[2, 4..10][2, 4..10] [2, 4, 6, 8, 10][2, 4, 6, 8, 10]
+[1, 3] ++ [5, 7][1, 3] ++ [5, 7] [1, 3, 5, 7][1, 3, 5, 7]
+1:[3, 5, 7]1:[3, 5, 7] [1, 3, 5, 7][1, 3, 5, 7]
+Haskell (continued)
+• Pattern Parameters
+    product [] = 1
+    product (a:x) = a * product x
+– Factorial:
+    fact n = product [1..n]
+• List Comprehensions
+   [n * n * n | n <- [1..50]]
+    
+product [] = 1
+product (a:x) = a * product x
+product [] = 1
+product (a:x) = a * product x
+fact n = product [1..n]fact n = product [1..n]
+[n * n * n | n <- [1..50]][n * n * n | n <- [1..50]]
+Quicksort
+sort [] = []
+sort (h:t) =
+  sort [b | b <- t, b <= h]
+    ++ [h] ++
+  sort [b | b <- t, b > h]
+Illustrates the concision of Haskell
+sort [] = []
+sort (h:t) =
+ sort [b | b <- t, b <= h]
+    ++ [h] ++
+ sort [b | b <- t, b > h]
+sort [] = []
+sort (h:t) =
+ sort [b | b <- t, b <= h]
+    ++ [h] ++
+ sort [b | b <- t, b > h]
+Lazy Evaluation
+• A language is strict if it requires all actual parameters to be 
+fully evaluated
+• A language is nonstrict if it does not have the strict 
+requirement
+• Nonstrict languages are more efficient and allow some 
+interesting capabilities – infinite lists
+• Lazy evaluation - Only compute those values that are 
+necessary
+• Positive numbers
+ positives = [0..]
+• Determining if 16 is a square number
+ member [] b = False
+ member(a:x) b=(a == b)||member x b
+ squares = [n * n | n ← [0..]]
+ member squares 16
+positives = [0..]positives = [0..]
+member [] b = False
+member b (a:x)=(a == b) || member x b
+squares = [n * n | n ← [0..]]
+member squares 16
+member [] b = False
+member b (a:x)=(a == b) || member x b
+squares = [n * n | n ← [0..]]
+member squares 16
+Member Revisited
+• The member function could be written as:
+ member b [] = False
+ member b (a:x)=(a == b) || member b x
+• However, this would only work if the parameter to 
+squares was a perfect square; if not, it will keep 
+generating them forever. The following version will 
+always work:
+ member2 n (m:x)
+  | m < n = member2 n x
+  | m == n = True
+  | otherwise = False
+member b [] = False
+member b (a:x)=(a == b) || member b x
+member b [] = False
+member b (a:x)=(a == b) || member b x
+member n (m:x)
+| m < n = member n x
+ | m == n = True
+ | otherwise = False
+member n (m:x)
+| m < n = member n x
+ | m == n = True
+ | otherwise = False
+Support for Functional Programming in 
+Primarily Imperative Languages
+Support for functional programming is 
+increasingly creeping into imperative 
+languages
+– Anonymous functions (lambda expressions)
+• JavaScript: leave the name out of a function 
+definition
+• C#: i => (i % 2) == 0 (           returns true or false 
+depending on whether the parameter is even or 
+odd)
+• Python: lambda a, b : 2 * a  - b
+(function(a){…})()(function(a){…})()
+i => (i % 2) == 0i => (i % 2) == 0
+lambda a, b : 2 * a  - blambda a, b : 2 * a  - b
+Support for Functional Programming in 
+Primarily Imperative Languages (continued)
+• Python supports the higher-order functions filter 
+and map (often use lambda expressions as their 
+first parameters)
+     map(lambda x : x ** 3, [2, 4, 6, 8])
+       returns [8, 64, 216, 512]
+• Python supports partial function applications
+    from operator import add
+   add5 = partial (add, 5)
+  
+    use: add5(15) will correspond to add(5, 15)
+map(lambda x : x ** 3, [2, 4, 6, 8])map(lambda x : x ** 3, [2, 4, 6, 8])
+from operator import add
+from functools import partial
+add5 = partial (add, 5)
+from operator import add
+from functools import partial
+add5 = partial (add, 5)
+Support for Functional Programming in 
+Primarily Imperative Languages (continued)
+Ruby Blocks
+– Subprograms that are sent to methods, which 
+makes the method a higher-order subprogram
+– A block can be converted to a subprogram 
+object with lambda
+    times = lambda {|a, b| a * b}
+    Use: x = times.(3, 4)  (sets x to 12)
+– Times can be curried with
+    times5 = times.curry.(5)
+    Use: x5 = times5.(3)  (sets x5 to 15)
+times = lambda {|a, b| a * b}times = lambda {|a, b| a * b}
+x = times.(3, 4)x = times.(3, 4)
+times5 = times.curry.(5)times5 = times.curry.(5)
+x5 = times5.(3)x5 = times5.(3)
+Comparing Functional and Imperative 
+Languages
+• Imperative Languages:
+– Efficient execution
+– Complex semantics
+– Complex syntax
+– Concurrency is programmer designed
+• Functional Languages:
+– Simple semantics
+– Simple syntax
+– Less efficient execution
+– Programs can automatically be made concurrent 
+Summary
+➢ Functional programming languages use function application, 
+conditional expressions, recursion, and functional forms to 
+control program execution
+➢ Lisp began as a purely functional language and later included 
+imperative features
+➢ Scheme is a relatively simple dialect of Lisp that uses static 
+scoping exclusively
+➢ Common Lisp is a large Lisp-based language
+➢ Haskell is a lazy functional language supporting infinite lists 
+and set comprehension.
+➢ Some primarily imperative languages now incorporate some 
+support for functional programming
+➢ Purely functional languages have advantages over imperative 
+alternatives, but still are not very widely used
+"
+5,Pointers,Pointers.pdf,"Pointer and Reference Types
+A pointer type variable has 
+a range of values that 
+consists of memory 
+addresses and a special 
+value, nil
+➢ Provide the power of indirect addressing
+➢ Provide a way to manage dynamic memory
+➢ A pointer can be used to access a location in the 
+area where storage is dynamically created (usually 
+called a heap)
+https://danny-padron09.medium.com/
+Design Issues of Pointers
+➢ What are the scope of and lifetime of a pointer 
+variable?
+➢ What is the lifetime of a heap-dynamic variable?
+➢ Are pointers restricted as to the type of value to 
+which they can point?
+➢ Are pointers used for 
+dynamic storage 
+management, indirect 
+addressing, or both?
+➢ Should the language 
+support pointer types?
+https://medium.com/
+Pointer Operations
+➢ Two fundamental operations: 
+assignment and dereferencing
+➢ Assignment is used to set a 
+pointer variable’s value to some 
+useful address
+➢ Dereferencing yields the value 
+stored at the location represented 
+by the pointer’s value
+▪ Dereferencing can be 
+explicit or implicit
+▪ C++ uses an explicit
+operation via *
+▪ j = *ptr
+▪ sets j to the value located at 
+ptr
+https://www.geeksforgeeks.org/
+Pointer Arithmetic in C and C++
+float stuff[100];
+float *p;
+p = stuff;
+*(p+5) is equivalent to stuff[5] and  p[5]
+*(p+i) is equivalent to stuff[i] and  p[i]
+stuff
+p
+Problems with Pointers 
+• Dangling pointers (dangerous)
+A pointer points to a heap-dynamic variable that has been 
+deallocated
+https://medium.com/
+pointers heap objects
+Problems with Pointers 
+• Lost heap-dynamic variable
+An allocated heap-dynamic variable that is no longer 
+accessible to the user program (often called garbage)
+▪ Pointer p1 is set to point to a newly created heap-dynamic 
+variable
+▪ Pointer p1 is later set to point to another newly created 
+heap-dynamic variable
+▪ The process of losing heap-dynamic variables is called 
+memory leakage
+
+Reference Types
+• C++ includes a special kind of pointer type 
+called a reference type that is used 
+primarily for formal parameters
+– Advantages of both pass-by-reference and 
+pass-by-value 
+• Java extends C++’s reference variables and 
+allows them to replace pointers entirely
+– References are references to objects, rather than 
+being addresses
+• C# includes both the references of Java and 
+the pointers of C++
+Evaluation of Pointers
+➢ Dangling pointers and 
+dangling objects are problems 
+as is heap management
+➢ Pointers are like goto's--they 
+widen the range of cells that can be 
+accessed by a variable
+Pointers or references 
+are necessary for 
+dynamic data structures
+-- so we can't design a 
+language without them
+https://www.scaler.com/
+Dangling Pointer Problem
+Tombstone: extra heap 
+cell that is a pointer to the 
+heap-dynamic variable
+➢ The actual pointer variable 
+points only at tombstones
+➢ When heap-dynamic 
+variable de-allocated,
+tombstone remains 
+but set to nil
+➢ Costly in time and space
+https://medium.com/
+HEAP
+
+Dangling Pointer Problem
+Locks-and-keys: Pointer
+values are represented as 
+(key, address) pairs
+➢ Heap-dynamic variables are 
+represented as variable plus 
+cell for integer lock value
+➢ When heap-dynamic variable 
+allocated, lock value is 
+created and placed in lock cell 
+and key cell of pointer
+https://medium.com/
+HEAP
+Heap Management
+• A very complex run-time 
+process
+• Single-size cells vs. 
+variable-size cells
+• Two approaches to reclaim 
+garbage
+1. Reference counters  (eager approach): reclamation is 
+gradual
+2. Mark-sweep  (lazy approach): reclamation occurs 
+when the list of variable space becomes empty
+Reference Counter
+Reference counters: maintain a counter in 
+every cell that store the number of pointers 
+currently pointing at the cell
+➢ Disadvantages: space required, execution time required, 
+complications for cells connected circularly, heap
+fragmentation
+➢ Advantage: it is intrinsically incremental, easy to implement, 
+no significant delays in the application execution
+Object
+
+Mark-Sweep
+The run-time system allocates storage cells as requested 
+and disconnects pointers from cells as necessary:
+1. Every heap cell has an extra 
+bit used by collection 
+algorithm 
+2. All cells initially set to garbage
+3. All pointers traced into heap, 
+and reachable cells marked as 
+not garbage (mark phase)
+4. All garbage cells returned to 
+list of available cells (sweep 
+phase)
+Disadvantages: in its original form, it was done too infrequently. When 
+done, it caused significant delays (halting) in application execution. 
+Contemporary mark-sweep algorithms avoid this by doing it more 
+often—called incremental mark-sweep
+Marking Algorithm
+Normal deletion removes unreferenced
+objects leaving referenced objects and 
+pointers to free space. The memory 
+allocator holds references to blocks of free 
+space where new objects can be allocated
+To further improve performance, we can 
+also compact the remaining referenced 
+objects. This makes new memory allocation 
+much easier and faster.
+Variable-Size Cells
+• All the difficulties of fixed-size cells plus 
+more
+• Required by most programming languages
+• If mark-sweep is used, additional problems 
+occur
+– The initial setting of the indicators of all cells in 
+the heap is difficult
+– The marking process in nontrivial
+– Maintaining the list of available space is another 
+source of overhead
+
+Rust Smart Pointers
+let b = Box::new(5); // Allocates an integer on the heap
+// Derefencing happens automatically when b goes out of 
+scope
+• Box<T> is the simplest smart pointer in 
+Rust, providing heap-allocated storage for 
+a value of type T. 
+• When a Box<T> goes out of scope, it 
+automatically deallocates the memory it 
+holds. 
+Rust Smart Pointers
+let x = Rc::new(5); // Rc is reference counted 
+let y = Rc::clone(&x); // Both x and y now share 
+ownership of the value
+• Rc<T>: when you need multiple parts of 
+your program to own the same data.
+• The data will be deallocated only when the 
+last Rc<T> pointing to it goes out of 
+scope. 
+"

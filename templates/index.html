@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ask a Question</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: linear-gradient(135deg, #8BC6EC, #9599E2);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .box {
+            background: white;
+            width: 600px;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 18px;
+        }
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 12px;
+            border: 1px solid #aaa;
+            border-radius: 8px;
+            resize: none;
+        }
+        button {
+            margin-top: 15px;
+            width: 100%;
+            background: #5571E8;
+            color: white;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #485fcb;
+        }
+        .answer-box {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #5571E8;
+        }
+        .logout {
+            text-align: center;
+            margin-top: 10px;
+            display: block;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Ask a Question</h2>
+
+    <form method="POST">
+        <textarea name="question" placeholder="Type your question here..." required></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if answer %}
+    <div class="answer-box">
+        <strong>Answer:</strong><br><br>
+        {{ answer }}
+    </div>
+    {% endif %}
+
+    <a class="logout" href="/logout">Logout</a>
+</div>
+
+</body>
+</html>

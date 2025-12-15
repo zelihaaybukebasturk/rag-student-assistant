@@ -1,0 +1,183 @@
+CENG493
+Text Preprocessing and Vector Models
+NLP Tasks Implementation Steps
+1.Formulating a research question or NLP task.
+2.Data collection and corpus building.
+3.Data preprocessing.
+4.Generating embeddings.
+5.Embedding-related tasks.
+6.Results.
+7.Interpreting results.
+https://carpentries-incubator.github.io/
+
+So, how to represent text(s) in 
+NLP?
+Definitions
+Letters and characters
+Definitions
+Corpus:
+N-Gram
+
+
+Vector
+
+Why vector models?
+
+
+
+How? 
+First very simple method → Bag of Words
+But…
+• Order matters! (all the time???)
+
+Documents -> Vectors
+
+Documents -> Vectors
+
+Simple Classification Example
+
+Simple Classification Example
+
+Code
+
+
+Normalization
+• A vector can be (length-) normalized by dividing each of its 
+components by its length.
+• Dividing a vector by its L2 norm makes it a unit (length) vector (on 
+surface of unit hypersphere)
+• Long and short documents now have comparable weights
+
+But, first text preprocessing!
+• Text Cleaning
+• Converting to lowercase
+• Removing URLs
+• Removing emojis
+• Removing remove non-word and non-whitespace characters
+• Removing digits
+• Removing accents(?)
+• Tokenization
+• Stopword Removal
+• Stemming
+• Lemmatization
+Tokenization
+
+Word-based tokenization
+“Is it weird I don’t like coffee?” →[“Is”, “it”, “weird”, “I”, “don’t”, “like”, “coffee?”]
+• “?” in “coffee?” is important or not?
+• What if we have a sentence “I love coffee.” in our corpus?
+• The reason that we should take punctuation into account while performing 
+tokenization is that we do not want our model to learn different representations 
+of the same word with every possible punctuation.
+• let’s take punctation into account.
+• [“Is”, “it”, “wierd”, “I”, “don”, “’”, “t”, “like”, “coffee”, “?”]
+Word-based tokenization
+• State-of-the-art NLP models have their own tokenizers because each 
+model uses different rules to perform tokenization along with 
+tokenizing using spaces.
+• Tokenizers of different NLP models can create different tokens for the 
+same text.
+• Space and punctuation, and rule-based tokenization are all examples 
+of word-based tokenization
+• Drawbacks???
+Character-based tokenization
+• Character-based tokenizers split the raw text into individual 
+characters.
+• A language has many different words but has a fixed number of 
+characters
+• This results in a very small vocabulary.
+Subword-based tokenization
+• The main idea is to solve the issues faced by word-based tokenization;
+• very large vocabulary size
+• large number of OOV tokens
+• different meaning of very similar words
+• and character-based tokenization;
+• very long sequences
+• less meaningful individual tokens
+• The subword-based tokenization algorithms uses the following principles.
+1.Do not split the frequently used words into smaller subwords.
+2.Split the rare words into smaller meaningful subwords.
+Stopwords
+
+Stopwords –Distance consideration
+
+Stopwords
+
+Stemming & Lemmatization
+
+Stemming & Lemmatization
+
+Stemming
+
+Lemmatization
+
+
+Applications in NLP
+• Tokenizationis used in text preprocessing, sentiment analysis, and 
+language modeling.
+• Stemming is useful for search engines, information retrieval, and text 
+mining.
+• Lemmatization is essential for chatbots, text classification, and 
+semantic analysis.
+POS(Parts-Of-Speech) Tagging
+
+POS
+• Part-of-speech tags describe the characteristic structure of 
+lexical terms within a sentence or text
+• We can use them for making assumptions about semantics.
+• Named Entity Recognition
+• Co-reference Resolution
+• Speech Recognition
+
+Back to vector models
+Vector Similarity
+
+How can we calculate vector similarity?
+
+Euclidean Distance
+Any problem???
+Another Example
+• «I love playing football with my friends»
+• «I hate waching and playing basketball»
+• «When I was a kid I was playing football with my friends every day all the 
+evening»
+
+Cosine similarity
+
+
+TF-IDF (Term Frequency-Inverse 
+Document Frequency)
+Still embedding?
+TF-IDF (Term Frequency-Inverse Document 
+Frequency)
+• TF-IDF (Term Frequency-Inverse Document Frequency) is a method 
+used to assess the importance of a word in a document or a collection 
+of texts. 
+• The result of TF-IDF is obtained by multiplying Term Frequency (TF) 
+and Inverse Document Frequency (IDF).
+
+TF-IDF
+• Term Frequency (TF): 
+• Measures how often a term appears in a text. 
+• It is calculated as the number of occurrences of a term divided by the total 
+number of terms in the text.
+• Inverse Document Frequency (IDF): 
+• Measures the rarity of a term across all texts in the collection. 
+• It is calculated as the logarithm of the total number of texts divided by the 
+number of texts containing the term.
+• TF-IDF: 
+• The product of TF and IDF, giving a higher weight to terms that are frequent in 
+a text but rare in the entire .
+TF-IDF
+
+BoW vs TF-IDF
+We can reduce the feature space by applying stopwords removal, stemming etc. but the initial 
+step of bag-of-words acts as a downside because it emphasizes words only based on counts. 
+BoW vs TF-IDF
+• Unlike, bag-of-words, tf-idf creates a normalized count where each 
+word count is divided by the number of documents this word appears 
+in.
+• bow(w, d) = # times word w appears in document d.
+• tf-idf(w, d) = bow(w, d) x N / (# documents in which word w appears)
+• The fraction (N / (# documents in which word w appears)) is known 
+as inverse document frequency.

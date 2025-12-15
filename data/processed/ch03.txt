@@ -1,0 +1,122 @@
+Language Models
+CENG 493
+Language Models
+• A language model is a statistical or machine learning model trained to 
+conduct a probability distribution over words.
+• The primary purpose of a language model is to capture the statistical 
+properties of natural language.
+• By learning the probability distribution of word sequences, a language 
+model can predict the likelihood of a given word following a sequence 
+of words.
+• Language models can be broadly categorized into two types:
+• Pure Statistical Methods
+• Neural Models
+Language Models
+• Pure Statistical Methods
+• N-gram models
+• Exponential Models (i.e. Maximum Entropy model)
+• Skip-gram models
+• Neural Models
+• Recurrent Neural Networks
+• LSTM
+• GRU
+• Transformer based models
+• BERT
+• Large Language Models (LLMs)
+Language Models
+What language models can do
+• Content generation
+• Part-of-speech (POS) tagging
+• Question answering
+• Text summarization
+• Sentiment analysis
+• Machine translation
+• Code completion
+• Conversational AI
+What language models can’t do
+• They can’t perform tasks that 
+involve
+• common-sense knowledge,
+• understanding abstract concepts, and
+• making inferences based on 
+incomplete information.
+• They also lack the ability to 
+• understand the world as humans do, 
+and they can't make decisions or take 
+actions in the physical world.
+Language Model
+
+Language Model
+
+Statistical Language Processing
+
+
+
+
+
+
+Bayes’ Theorem
+• Bayes' Theorem is a way of finding a probability when we know 
+certain other probabilities.
+• The formula is:
+
+Bayes’ Theorem
+
+Back to Language Models (LMs)
+
+N-grams
+
+
+How to compute P(W) 
+• How to compute this joint probability:
+• P(its, water, is, so, transparent, that)
+• Intuition: let’s rely on the Chain Rule of Probability
+
+
+
+Markov Assumption
+The assumption that the probability of a word depends only on the previous word(s) is
+called Markov assumption
+Simpest Case- Unigrams
+
+Bigram (2-gram)
+
+N-grams
+
+
+
+
+
+
+
+
+
+Estimating N-Gram Probabilities - Example 2:
+Berkeley Restaurant Project sentences
+
+Estimating N-Gram Probabilities - Example 2:
+Berkeley Restaurant Project sentences 
+Estimating N-Gram Probabilities - Example 2:
+Berkeley Restaurant Project sentences 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+References
+• NLP Course slides from 
+• University of Southern Maine
+(https://cs.usm.maine.edu/~behrooz.mansouri/)
+• Hacettepe University 
+(https://web.cs.hacettepe.edu.tr/~ilyas/Courses/BIL711/)
+• Stanford University 
+(https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1234/)
